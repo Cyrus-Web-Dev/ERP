@@ -1,0 +1,39 @@
+<?php
+
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\RegisterVerifyController;
+use App\Http\Controllers\Auth\TwoFactorChallengeController;
+use Illuminate\Support\Facades\Route;
+
+Route::middleware('guest')->group(function () {
+    // Register (tahap 1: isi form -> kirim kode ke email)
+    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('register', [RegisteredUserController::class, 'store']);
+
+    // Register (tahap 2: verifikasi kode -> akun benar-benar dibuat)
+    Route::get('register/verify', [RegisterVerifyController::class, 'create'])->name('register.verify');
+    Route::post('register/verify', [RegisterVerifyController::class, 'store']);
+    Route::post('register/verify/resend', [RegisterVerifyController::class, 'resend'])->name('register.verify.resend');
+
+    // Login (tahap 1: email+password -> kirim kode 2FA)
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+
+    // Login (tahap 2: verifikasi kode 2FA -> sesi login benar-benar dibuat)
+    Route::get('two-factor-challenge', [TwoFactorChallengeController::class, 'create'])->name('two-factor.challenge');
+    Route::post('two-factor-challenge', [TwoFactorChallengeController::class, 'store'])->name('two-factor.verify');
+    Route::post('two-factor-challenge/resend', [TwoFactorChallengeController::class, 'resend'])->name('two-factor.resend');
+
+    // Lupa Password
+    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.update');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+});
