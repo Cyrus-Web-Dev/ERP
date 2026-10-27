@@ -1,4 +1,15 @@
 Project ERP — Enterprise Resources Planning (Suite)
+> **⚠️ DISCLAIMER — KERANGKA / SUITE MENTAH**
+>
+> Suite **ERP** ini (Inventaris, Pengadaan/Procura, SDM HRIS, Keuangan, Paybridge, dll.) adalah **kerangka pengembangan**, **bukan** sistem ERP yang siap produksi atau siap dipakai langsung di perusahaan / industri.
+>
+> - Jalankan sesuai petunjuk README / setup tiap modul.
+> - Sebaiknya ditinjau dan diuji oleh pihak yang memahami proses bisnis & IT perusahaan (akuntansi, procurement, HR, keamanan sistem).
+> - Kesesuaian alur (pengadaan, inventaris, payroll, persetujuan, integrasi antar-modul) **bergantung evaluasi klien**.
+> - Keamanan, kepatuhan, dan kelengkapan fitur **belum** diklaim memadai untuk lingkungan produksi nyata.
+>
+> Saya sebagai developer menyediakan **fondasi / kerangka** end-to-end.  
+> Apakah sudah sesuai kebutuhan, aman, dan layak dilanjutkan — **keputusan dan tanggung jawab evaluasinya ada pada pengguna / klien**.
 
 ====================================================
 
